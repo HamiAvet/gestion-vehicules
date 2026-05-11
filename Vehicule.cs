@@ -7,40 +7,28 @@ using System.Threading.Tasks;
 
 namespace gestion_vehicules
 {
-    // Classe mère Vehicule
-    internal class Vehicule
+    // Classe mère Vehicule qui est abstraite, ce qui signifie qu'elle ne peut pas être instanciée directement et doit être héritée par des classes filles
+    public abstract class Vehicule
     {
         // Variables d'instance pour la marque et le modèle du véhicule
         private string marque;
         private string modele;
 
         // Constructeur de la classe mère Vehicule
-        public Vehicule(string marque, string modele)
+        protected Vehicule(string marque, string modele)
         {
             this.marque = marque;
             this.modele = modele;
         }
 
-        // Getters et setters pour les propriétés de la classe mère
-        public string getMarque()
+        // Cette méthode protégée permet de récupérer les informations de base du véhicule (marque et modèle)
+        protected string RecupInfo()
         {
-            return marque;
+            return $"Marque: {marque}, Modèle: {modele}";
         }
 
-        public void setMarque(string marque)
-        {
-            this.marque = marque;
-        }
-
-        public string getModele()
-        {
-            return modele;
-        }
-
-        public void setModele(string modele)
-        {
-            this.modele = modele;
-        }
+        // Méthode abstraite que les classes filles doivent implémenter pour fournir des informations spécifiques à leur type de véhicule
+        public abstract string VehiculInfo();
 
         // Classe fille Voiture qui hérite de Vehicule
         public class Voiture : Vehicule
@@ -54,15 +42,10 @@ namespace gestion_vehicules
                 this.nbPortes = nbPortes;
             }
 
-            // getters et setters pour les propriétés de la classe fille Voiture
-            public int getNbPortes()
+            // Implémentation de la méthode abstraite VehiculInfo pour la classe Voiture
+            public override string VehiculInfo()
             {
-                return nbPortes;
-            }
-
-            public void setNbPortes(int nbPortes)
-            {
-                this.nbPortes = nbPortes;
+                return (base.RecupInfo() + $", Nombre de portes: {this.nbPortes}");
             }
         }
 
@@ -79,18 +62,13 @@ namespace gestion_vehicules
                 this.cylindree = cylindree;
             }
 
-            // getters et setters pour les propriétés de la classe fille Moto
-            public int getCylindree()
+            // Implémentation de la méthode abstraite VehiculInfo pour la classe Moto
+            public override string VehiculInfo()
             {
-                return cylindree;
-            }
-
-            public void setCylindree(int cylindree)
-            {
-                this.cylindree = cylindree;
+                return (base.RecupInfo() + $", Cylindrée: {this.cylindree}");
             }
         }
 
-        
+
     }
 }
