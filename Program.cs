@@ -23,6 +23,9 @@ namespace gestion_vehicules
             {
                 Console.WriteLine(unVehicule.VehiculInfo());
             }
+
+            // Eviter que la console se ferme immédiatement
+            Console.ReadKey();
         }
     }
 }
